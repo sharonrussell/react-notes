@@ -3,9 +3,7 @@ class Notes extends React.Component {
 	constructor(){
 		super();
 		this.state = {
-			notes: [
-				{title: "Note 1", body: "body 1", id: 1}
-			]
+			notes: []
 		}
 	}
 
@@ -20,12 +18,23 @@ class Notes extends React.Component {
 	 	});
 	};
 
+	_addNote(event){
+		event.preventDefault();
+		const note = {
+			title:"Dummy title",
+			body:"Dummy body",
+			id: this.state.notes.length + 1
+		}
+		this.setState({ notes: this.state.notes.concat([note]) });
+	}
+
 	render() {
 
 		const notes = this._getNotes();
 		return (
 			<div className="notes">
 				<h1>Notes</h1>
+				<a href='#' className="note-add" onClick={this._addNote.bind(this)}>Add Note</a>
 				<div>
 					{notes}
 				</div>
