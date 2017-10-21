@@ -13,7 +13,8 @@ class Notes extends React.Component {
 	 			<Note
 	 			title={note.title}
 	 			body={note.body}
-	 			key={note.id} />
+	 			key={note.id}
+				onDelete={this._deleteNote.bind(this)}/>
 	 		);
 	 	});
 	};
@@ -25,6 +26,13 @@ class Notes extends React.Component {
 			body
 		};
 		this.setState({notes: this.state.notes.concat([note])});
+	}
+
+	_deleteNote(note){
+		const notes = [...this.state.notes];
+ 		const noteIndex = notes.indexOf(note);
+ 		notes.splice(noteIndex, 1);
+ 		this.setState({ notes });
 	}
 
 	render() {
@@ -43,11 +51,21 @@ class Notes extends React.Component {
 }
 
 class Note extends React.Component {
+	_handleDelete(event){
+		event.preventDefault();
+		this.props.onDelete(this.props.note);
+	}
+
 	render() {
 		return(
 			<div className="note">
 				<h2 className="title">{this.props.title}</h2>
 				<p className="body">{this.props.body}</p>
+				<div>
+					<a href="#" onClick={this._handleDelete.bind(this)}>
+						Delete
+					</a>
+				</div>
 			</div>
 		);
 	}
