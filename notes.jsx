@@ -18,14 +18,13 @@ class Notes extends React.Component {
 	 	});
 	};
 
-	_addNote(event){
-		event.preventDefault();
-		const note = {
-			title:"Dummy title",
-			body:"Dummy body",
-			id: this.state.notes.length + 1
-		}
-		this.setState({ notes: this.state.notes.concat([note]) });
+	_addNote(title, body){
+		const note ={
+			id: this.state.notes.length + 1,
+			title,
+			body
+		};
+		this.setState({notes: this.state.notes.concat([note])});
 	}
 
 	render() {
@@ -34,7 +33,7 @@ class Notes extends React.Component {
 		return (
 			<div className="notes">
 				<h1>Notes</h1>
-				<a href='#' className="note-add" onClick={this._addNote.bind(this)}>Add Note</a>
+				<NoteForm addNote={this._addNote.bind(this)}/>
 				<div>
 					{notes}
 				</div>
@@ -54,6 +53,29 @@ class Note extends React.Component {
 	}
 }
 
+class NoteForm extends React.Component {
+	_handleSubmit(event){
+		event.preventDefault();
+		let title = this._title;
+ 		let body = this._body;
+ 		this.props.addNote(title.value, body.value);
+	}
+
+	render(){
+		return(
+			<form className="note-form" onSubmit={this._handleSubmit.bind(this)}>
+				<input placeholder="Title:" ref={(input) => this._title = input}/>
+				<textarea placeholder="Body:" ref={(textarea) => this._body = textarea}>
+				</textarea>
+				<div className="comment-form-actions">
+ 					<button type="submit">
+ 						Post comment
+ 					</button>
+ 				</div>
+			</form>
+		);
+	}
+}
 
 ReactDOM.render(
 	<Notes />, document.getElementById('notes')
