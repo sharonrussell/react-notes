@@ -1,0 +1,37 @@
+h1 {
+  font-size: 35px;
+  color: coral;
+  font-family: system-ui; }
+
+h2 {
+  font-size: 20px;
+  color: palevioletred;
+  font-family: system-ui; }
+
+input {
+  display: block;
+  margin-bottom: 10px;
+  min-width: 201px;
+  font-family: system-ui;
+  border: none;
+  background: bisque; }
+
+textarea {
+  display: block;
+  margin-bottom: 10px;
+  min-width: 200px;
+  min-height: 200px;
+  font-family: system-ui;
+  border: none;
+  background: bisque; }
+
+a {
+  color: tomato;
+  font-family: system-ui; }
+
+button {
+  color: saddlebrown;
+  padding: 10px;
+  border: darkorange 1px dashed;
+  background: white;
+  font-family: system-ui; }
