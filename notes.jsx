@@ -85,9 +85,9 @@ class NoteForm extends React.Component {
 				<input placeholder="Title:" ref={(input) => this._title = input}/>
 				<textarea placeholder="Body:" ref={(textarea) => this._body = textarea}>
 				</textarea>
-				<div className="comment-form-actions">
+				<div className="note-form-actions">
  					<button type="submit">
- 						Post comment
+ 						Add note
  					</button>
  				</div>
 			</form>
