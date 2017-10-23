@@ -11,7 +11,6 @@ class Notes extends React.Component {
 		return this.state.notes.map((note) => {
 	 		return (
 	 			<Note
-	 			title={note.title}
 	 			body={note.body}
 	 			key={note.id}
 				onDelete={this._deleteNote.bind(this)}/>
@@ -19,10 +18,9 @@ class Notes extends React.Component {
 	 	});
 	};
 
-	_addNote(title, body){
+	_addNote(body){
 		const note ={
 			id: this.state.notes.length + 1,
-			title,
 			body
 		};
 		this.setState({notes: this.state.notes.concat([note])});
@@ -59,7 +57,6 @@ class Note extends React.Component {
 	render() {
 		return(
 			<div className="note">
-				<h2 className="title">{this.props.title}</h2>
 				<p className="body">{this.props.body}</p>
 				<div>
 					<a href="#" onClick={this._handleDelete.bind(this)}>
@@ -74,15 +71,13 @@ class Note extends React.Component {
 class NoteForm extends React.Component {
 	_handleSubmit(event){
 		event.preventDefault();
-		let title = this._title;
  		let body = this._body;
- 		this.props.addNote(title.value, body.value);
+ 		this.props.addNote(body.value);
 	}
 
 	render(){
 		return(
 			<form className="note-form" onSubmit={this._handleSubmit.bind(this)}>
-				<input placeholder="Title:" ref={(input) => this._title = input}/>
 				<textarea placeholder="Body:" ref={(textarea) => this._body = textarea}>
 				</textarea>
 				<div className="note-form-actions">

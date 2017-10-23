@@ -3,25 +3,13 @@ h1{
     color: coral;
     font-family: system-ui;
 }
-h2{
-    font-size: 20px;
-    color: palevioletred;
-    font-family: system-ui;
-}
-
-input{
-    display: block;
-    margin-bottom: 10px;
-    min-width: 201px;
-    font-family: system-ui;
-    border: none;
-    background: bisque;
-}
 
 textarea{
     display: block;
     margin-bottom: 10px;
     min-width: 200px;
+    max-width: 200px;
+    max-height: 200px;
     min-height: 200px;
     font-family: system-ui;
     border: none;
@@ -31,6 +19,11 @@ textarea{
 a{
     color: tomato;
     font-family: system-ui;
+    font-size: 15px;
+}
+
+p{
+    font-size: 25px;
 }
 
 button{
