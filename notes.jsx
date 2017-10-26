@@ -6,13 +6,51 @@ class Notes extends React.Component {
 			notes: []
 		}
 	}
+	
+	render() {
+		const notes = this._getNotes();
+		return (
+			<div className="notes">
+				<h1>Notes</h1>
+				<NoteForm addNote={this._addNote.bind(this)}/>
+				<div>
+					{notes}
+				</div>
+			</div>
+		);
+	};
+
+	componentWillMount() {
+		this._fetchNotes();
+	};
+
+	componentDidMount() {
+		this._timer = setInterval(
+			() => this._fetchNotes(),
+			5000
+		);
+	};
+
+	componentWillUnmount() {
+		clearInterval(this._timer);
+	};
+
+	_fetchNotes() {
+		jQuery.ajax({
+			method: 'GET',
+			url: 'http://localhost:3000/notes',
+			success: (notes) => {
+				this.setState({ notes })
+			}
+		});	
+	};
 
 	_getNotes() {
 		return this.state.notes.map((note) => {
 	 		return (
 	 			<Note
 	 			body={note.body}
-	 			key={note.id}
+	 			key={note.body + note.id}
 				onDelete={this._deleteNote.bind(this)}/>
 	 		);
 	 	});
@@ -32,20 +70,6 @@ class Notes extends React.Component {
  		notes.splice(noteIndex, 1);
  		this.setState({ notes });
 	}
-
-	render() {
-
-		const notes = this._getNotes();
-		return (
-			<div className="notes">
-				<h1>Notes</h1>
-				<NoteForm addNote={this._addNote.bind(this)}/>
-				<div>
-					{notes}
-				</div>
-			</div>
-		);
-	};
 }
 
 class Note extends React.Component {
