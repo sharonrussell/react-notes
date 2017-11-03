@@ -12,6 +12,7 @@ class Notes extends React.Component {
 		return (
 			<div className="notes">
 				<h1>Notes</h1>
+				<NoteForm addNote={this._addNote.bind(this)}/>
 				<div>
 					{notes}
 				</div>
@@ -60,19 +61,22 @@ class Notes extends React.Component {
 		jQuery.ajax({
 			method: 'POST',
 			url: `http://localhost:3000/delete/${note.id}`,
-			crossDomain: true,
+			crossDomain: true
 		});
+	}
 
-		const notes = [...this.state.notes];
-		const noteIndex = notes.indexOf(note);
-		notes.splice(noteIndex, 1);
-		this.setState({ notes });
+	_addNote(body){
+		jQuery.ajax({
+			method: 'POST',
+			url: `http://localhost:3000/add`,
+			data: {"body": body},
+			crossDomain: true
+		});
 	}
 }
 
 class Note extends React.Component {
 	_handleDelete(event){
-		console.log(this.props)
 		event.preventDefault();
 		this.props.onDelete(this.props);
 	}
@@ -81,13 +85,34 @@ class Note extends React.Component {
 		return(
 			<div className="note">
 				<p className="body">{this.props.body}</p>
-				<p className="id">{this.props.id}</p>
 				<div>
 					<a href="#" onClick={this._handleDelete.bind(this)}>
 						Delete
 					</a>
 				</div>
 			</div>
+		);
+	}
+}
+
+class NoteForm extends React.Component {
+	_handleSubmit(event){
+		event.preventDefault();
+ 		let body = this._body;
+ 		this.props.addNote(body.value);
+	}
+
+	render(){
+		return(
+			<form className="note-form" onSubmit={this._handleSubmit.bind(this)}>
+				<textarea placeholder="Body:" ref={(textarea) => this._body = textarea}>
+				</textarea>
+				<div className="note-form-actions">
+ 					<button type="submit">
+ 						Add note
+ 					</button>
+ 				</div>
+			</form>
 		);
 	}
 }
