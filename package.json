@@ -1,0 +1,25 @@
+{
+  "name": "react-notes",
+  "version": "1.0.0",
+  "description": "A client side react app that allows you to add notes, delete notes and edit notes",
+  "main": "Gulpfile.js",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0",
+    "http-server": "^0.10.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sharonrussell/react-notes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sharonrussell/react-notes/issues"
+  },
+  "homepage": "https://github.com/sharonrussell/react-notes#readme"
+}
